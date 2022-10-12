@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/5/2015 1:29:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ORL-DEV-IT01"
+  DTS:CreatorName="ORLANDO\dspeight"
+  DTS:DTSID="{F57CE450-68A4-42C4-945A-FBBCA2A1F33B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.157"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="00-PerfCounterExport"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="114"
+  DTS:VersionGUID="{68BB3DB4-2A6E-4835-89D1-5DD3F5AEA5C4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File CSV Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{28B2660E-3093-44DA-B1AD-2889373BE94D}"
+      DTS:ObjectName="Flat File CSV Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::pCsvPath] +   @[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="E:\Data\staged\">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 0"
+              DTS:DTSID="{D051C835-F045-4D3D-87D0-99DD51365B7D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 1"
+              DTS:DTSID="{46EB4D08-8122-4526-B852-5F2AB148891C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 2"
+              DTS:DTSID="{2CC55790-FCDF-4DC6-B6F3-F0DC89CC1DD4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 3"
+              DTS:DTSID="{E2EB1391-D578-4E38-8D7B-5A3A891DF326}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 4"
+              DTS:DTSID="{4F68A62A-F5FA-4701-BD14-E3786799A408}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 5"
+              DTS:DTSID="{1721D122-39A9-4F5C-BBC8-3F597F478350}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 6"
+              DTS:DTSID="{68061EDD-90C8-4469-BF1B-896EF7B6E655}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 7"
+              DTS:DTSID="{8D6A7D89-35FA-4585-A19D-3DE3A2FE2365}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D2F39FDE-EEEF-4E58-BAAE-16270775EC09}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClusterID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{935A929F-E7C1-4F2A-90C7-72798206F66F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="connString">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F7B43D6C-05D8-4EB9-A01B-16C0FA7DE36B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="curDateKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4D4A1408-D095-4BE2-B2C7-962D97CC586C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="curTimeKey">
+      <DTS:VariableValue
+        DTS:DataType="8">000000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{837367B9-5B5A-4767-923F-DC0D2D909B7C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="EndID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{96ACD0AB-148F-45D9-BBCC-1337EB2786A3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EDB5940F-D690-4100-B7E1-3093CEAD8280}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="lastDateKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C9013B2F-8882-47F9-ACEB-8210BCDF8639}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="lastTimeKey">
+      <DTS:VariableValue
+        DTS:DataType="8">000000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1F924624-724F-4FEE-AC7A-B15C5419913A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LocationID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7A1042C2-539F-4A65-AF16-9D40710741E8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ParentAuditKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F378376D-93A4-4C03-860B-CC958906D899}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PerfLocationID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D635DC73-8B28-4801-BBE0-A3FFFE96FF1D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D68527CF-D40A-45EA-8268-D8EF9B5AF6FD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ServerID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{639D3AA0-4A3A-4F89-8466-BCEB758CEAC6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ServerName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{02F7A749-4495-47B0-80B6-241567F2A7E6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StartID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Audit Log Begin"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A860D00F-9782-46B4-A294-7F0128A4F942}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Audit Log Begin"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8D581C5C-F072-4626-843A-7FBF5C7956C5}"
+          SQLTask:SqlStatementSource="INSERT INTO Analysis.PerfCounterLogActions&#x9;&#xA;(ParentLogID, &#xA;PerfLocationID,&#xA;LocationID,&#xA;ClusterID, &#xA;ServerID,&#xA;DateKey, &#xA;TimeKey, &#xA;QueryName, &#xA;StepID, &#xA;StartID, &#xA;EndID, &#xA;Description, &#xA;Action, &#xA;FileName, &#xA;RunStartUtc, &#xA;RunEndUtc, &#xA;RunSuccess, &#xA;RowsAffected, &#xA;ErrorCount, &#xA;VerifiedUtc)&#xA;VALUES&#xA;(NULL,&#xA;?,&#xA;?,&#xA;?,&#xA;?,&#xA;?,&#xA;?,&#xA;'PerfCountIncrementalDataGete',&#xA;1,&#xA;?,&#xA;?,&#xA;'SSIS: Pull data for csv file.',&#xA;'EXPORTCSV',&#xA;?,&#xA;getdate(), &#xA;NULL,&#xA;0,&#xA;?,&#xA;0,&#xA;NULL)&#xA;SELECT MAX(LogID) AS ParentID  from Analysis.PerfCounterLogActions"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ParentAuditKey" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::PerfLocationID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::LocationID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::ClusterID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::ServerID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::curDateKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::curTimeKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::StartID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::EndID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="8"
+            SQLTask:DtsVariableName="User::FileName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="9"
+            SQLTask:DtsVariableName="User::RowCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="131"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Last Keys"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FE4935EE-7F22-4E87-B0A6-4BA7576F4CEA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Last Keys"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8D581C5C-F072-4626-843A-7FBF5C7956C5}"
+          SQLTask:SqlStatementSource="SELECT ISNULL(MAX(DateKey),CONVERT(VARCHAR(10), GETDATE(),112)) As LastDateKey, &#xA;ISNULL(MAX(TimeKey),'000000') As LastTimeKey,&#xA;CONVERT(VARCHAR(10), GETUTCDATE(),112) AS CurDateKey,&#xA;REPLACE(CONVERT(VARCHAR(10), GETUTCDATE(),108),':','') AS CurTimeKey,&#xA;ISNULL(MAX(EndID),0) AS StartID,&#xA;(SELECT ISNULL(MAX(ID),0) FROM [Analysis].[PerfCounterLog]) AS EndID,&#xA;CONCAT('pc-',&#xA;&#x9;CONVERT(varchar(12),(SELECT LocationID FROM Analysis.Server where isCurrent=1)),'-',&#xA;&#x9;CONVERT(varchar(12),(SELECT PerfLocationID FROM Analysis.Server where isCurrent=1)),'-',&#xA;&#x9;CONVERT(varchar(12),(ISNULL(MAX(DateKey),CONVERT(VARCHAR(10), GETUTCDATE(),112)))),'-',&#xA;&#x9;CONVERT(varchar(12),(ISNULL(MAX(TimeKey),'000000'))),'-',&#xA;&#x9;CONVERT(varchar(12),(CONVERT(VARCHAR(10), GETUTCDATE(),112))),'-',&#xA;&#x9;CONVERT(varchar(12),(REPLACE(CONVERT(VARCHAR(10), GETUTCDATE(),108),':',''))),&#xA;&#x9;'.csv') AS FileName,&#xA;((SELECT ISNULL(MAX(ID),0) FROM [Analysis].[PerfCounterLog]) - ISNULL(MAX(EndID),0) ) AS RowTotal&#xA;FROM  [Analysis].[PerfCounterLogActions] &#xA;WHERE LogID = (&#xA;&#x9;SELECT MAX(LogID)&#xA;&#x9;FROM  [Analysis].[PerfCounterLogActions]&#xA;&#x9;WHERE StepID = 1 and RunSuccess = 1);"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastDateKey"
+            SQLTask:DtsVariableName="User::lastDateKey" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastTimeKey"
+            SQLTask:DtsVariableName="User::lastTimeKey" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="CurDateKey"
+            SQLTask:DtsVariableName="User::curDateKey" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="CurTimeKey"
+            SQLTask:DtsVariableName="User::curTimeKey" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="StartID"
+            SQLTask:DtsVariableName="User::StartID" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="EndID"
+            SQLTask:DtsVariableName="User::EndID" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="FileName"
+            SQLTask:DtsVariableName="User::FileName" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="RowTotal"
+            SQLTask:DtsVariableName="User::RowCount" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Server Name"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EDA4C628-9D43-47F2-A1C5-1DEF5F75085D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Server Name"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8D581C5C-F072-4626-843A-7FBF5C7956C5}"
+          SQLTask:SqlStatementSource="select TOP(1) ClusterName as ServerName,&#xA;PerfLocationID,&#xA;LocationID,&#xA;ClusterID,&#xA;ServerID&#xA;from Analysis.Server &#xA;where isCurrent = 1"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ServerName"
+            SQLTask:DtsVariableName="User::ServerName" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="PerfLocationID"
+            SQLTask:DtsVariableName="User::PerfLocationID" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LocationID"
+            SQLTask:DtsVariableName="User::LocationID" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ClusterID"
+            SQLTask:DtsVariableName="User::ClusterID" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ServerID"
+            SQLTask:DtsVariableName="User::ServerID" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Import Disk Memory Stats"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7A901AD5-DA54-40DF-9F1F-15124187156B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Import Disk Memory Stats"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath="D:\S3\ssis\BlobTemp\"
+          bufferTempStoragePath="D:\S3\ssis\BufferTemp\"
+          version="1">
+          <components>
+            <component
+              refId="Package\Import Disk Memory Stats\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Import Disk Memory Stats\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File CSV Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File CSV Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[ID]"
+                      cachedDataType="i4"
+                      cachedName="ID"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ID]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[PerfLocationID]"
+                      cachedDataType="i4"
+                      cachedName="PerfLocationID"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 1]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PerfLocationID]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[MetricID]"
+                      cachedDataType="i4"
+                      cachedName="MetricID"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 2]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[MetricID]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 3]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[TimeKey]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="TimeKey"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 4]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[TimeKey]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[iVal]"
+                      cachedDataType="i8"
+                      cachedName="iVal"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 5]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[iVal]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[dVal]"
+                      cachedDataType="numeric"
+                      cachedName="dVal"
+                      cachedPrecision="10"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 6]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[dVal]" />
+                    <inputColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].Columns[PartName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="PartName"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 7]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PartName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 0]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 0" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 1" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 2" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 3" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 4" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 5" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 6]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 6" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Column 7]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 7" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Import Disk Memory Stats\OLE DB Source 1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source 1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT        TOP (10000) ID, PerfLocationID, MetricID, DateKey, TimeKey, iVal, dVal, REPLACE(PartName,'''','') AS PartName
+FROM            Analysis.PerfCounterLog
+WHERE        (ID BETWEEN ? AND ?)
+ORDER BY ID DESC</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{02F7A749-4495-47B0-80B6-241567F2A7E6};"Parameter1:Input",{837367B9-5B5A-4767-923F-DC0D2D909B7C};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Import Disk Memory Stats\OLE DB Source 1.Connections[OleDbConnection]"
+                  connectionManagerID="{8D581C5C-F072-4626-843A-7FBF5C7956C5}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ServerAnalysis]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[ID]"
+                      name="ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PerfLocationID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[PerfLocationID]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PerfLocationID]"
+                      name="PerfLocationID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[MetricID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[MetricID]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[MetricID]"
+                      name="MetricID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[TimeKey]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[TimeKey]"
+                      length="6"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[TimeKey]"
+                      name="TimeKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[iVal]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[iVal]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[iVal]"
+                      name="iVal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[dVal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[dVal]"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[dVal]"
+                      name="dVal"
+                      precision="10"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PartName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[PartName]"
+                      length="250"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].Columns[PartName]"
+                      name="PartName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[ID]"
+                      dataType="i4"
+                      name="ID" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[PerfLocationID]"
+                      dataType="i4"
+                      name="PerfLocationID" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[MetricID]"
+                      dataType="i4"
+                      name="MetricID" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[TimeKey]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="TimeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[iVal]"
+                      dataType="i8"
+                      name="iVal" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[dVal]"
+                      dataType="numeric"
+                      name="dVal"
+                      precision="10"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output].ExternalColumns[PartName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="PartName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      dataType="i4"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ID]"
+                      name="ID" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[PerfLocationID]"
+                      dataType="i4"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[PerfLocationID]"
+                      name="PerfLocationID" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[MetricID]"
+                      dataType="i4"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[MetricID]"
+                      name="MetricID" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[TimeKey]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[TimeKey]"
+                      name="TimeKey" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[iVal]"
+                      dataType="i8"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[iVal]"
+                      name="iVal" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[dVal]"
+                      dataType="numeric"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[dVal]"
+                      name="dVal"
+                      precision="10"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[PartName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[PartName]"
+                      name="PartName" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Import Disk Memory Stats.Paths[OLE DB Source Output]"
+              endId="Package\Import Disk Memory Stats\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Import Disk Memory Stats\OLE DB Source 1.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL Audit End"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EA5FFBA1-2607-4E42-ADEB-8D627BDFCE93}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL Audit End"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8D581C5C-F072-4626-843A-7FBF5C7956C5}"
+          SQLTask:SqlStatementSource="UPDATE [Analysis].[PerfCounterLogActions]&#xA;SET &#xA;ParentLogID = ?,&#xA;RunEndUtc = SYSDATETIME(),&#xA;RunSuccess=1&#xA;Where LogID = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ParentAuditKey"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{69724E2C-587A-43FC-BA7D-31A2E2657698}"
+      DTS:From="Package\Get Last Keys"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Audit Log Begin" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DF0ECB87-5B2F-4326-BFCB-E4116893F9FA}"
+      DTS:From="Package\Get Server Name"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Get Last Keys" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{81AFB9C0-B096-4200-BD40-D988B2C5CA38}"
+      DTS:From="Package\Audit Log Begin"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Import Disk Memory Stats" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{1A4B4AA1-99A4-401A-A104-A4A1F48E2690}"
+      DTS:From="Package\Import Disk Memory Stats"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\SQL Audit End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Audit Log Begin"
+          TopLeft="553.333333200879,274.5" />
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\Get Last Keys"
+          TopLeft="546.999999900659,196.633333326446" />
+        <NodeLayout
+          Size="164,41.6"
+          Id="Package\Get Server Name"
+          TopLeft="540.499999900659,107.5" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Import Disk Memory Stats"
+          TopLeft="533.5,361.5" />
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\SQL Audit End"
+          TopLeft="567.5,455.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="620.999999900659,238.233333326446">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.7333333002197,36.2666666735543"
+              Start="0,0"
+              End="10.7333333002197,28.7666666735543">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.1333333367772" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.1333333367772"
+                    Point2="0,18.1333333367772"
+                    Point3="4,18.1333333367772" />
+                  <mssgle:LineSegment
+                    End="6.73333330021967,18.1333333367772" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.73333330021967,18.1333333367772"
+                    Point2="10.7333333002197,18.1333333367772"
+                    Point3="10.7333333002197,22.1333333367772" />
+                  <mssgle:LineSegment
+                    End="10.7333333002197,28.7666666735543" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="621.749999900659,149.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.533333326446"
+              Start="0,0"
+              End="0,40.033333326446">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.033333326446" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="633.616666600439,316.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.4"
+              Start="0,0"
+              End="0,37.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="638.25,403.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Import Disk Memory Stats">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Import Disk Memory Stats\OLE DB Source 1"
+          TopLeft="404,104" />
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\Import Disk Memory Stats\Flat File Destination"
+          TopLeft="394,271" />
+        <EdgeLayout
+          Id="Package\Import Disk Memory Stats.Paths[OLE DB Source Output]"
+          TopLeft="484.5,146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,125"
+              Start="0,0"
+              End="0,117.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,117.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import Disk Memory Stats\OLE DB Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
