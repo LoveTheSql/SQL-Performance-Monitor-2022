@@ -1,0 +1,25 @@
+INSTRUCTIONS  2022 10 12
+
+USE AT YOUR WON RISK.
+EVERYTHING HAS NOT BEEN FULLY TESTED
+THIS IS A WORK IN PROGRESS
+
+
+Thank you, David Speight.
+
+
+
+Please refer to this blog for details
+https://lovethesql.com/sql-performance-monitor-part-1-overview/
+
+
+Install the databases first.
+Install the DATA for Metrics next.
+Open the Visual Studio Project and revise DataSource for your need.
+TEST
+
+
+Occassionally I may upload additional scripts with fixes or more Metric definitions.
+When creating your own Metrics, I suggest that you create them AFTER the ID numbers I have reserved. Theat way a later update shouldn't overwrite any custom Metrics you create.
+
+

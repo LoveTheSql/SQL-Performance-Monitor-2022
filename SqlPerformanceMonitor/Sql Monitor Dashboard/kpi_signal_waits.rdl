@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="ServerAnalysisDW">
+      <DataSourceReference>ServerAnalysisDW</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>9ee90478-a3a2-420a-9eb7-d731ec371650</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Locations">
+      <SharedDataSet>
+        <SharedDataSetReference>Locations</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="LocationID">
+          <DataField>LocationID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="LocactionName">
+          <DataField>LocactionName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Clusters">
+      <SharedDataSet>
+        <SharedDataSetReference>Clusters</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="@LocationID">
+            <Value>=Parameters!LocationID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="ClusterID">
+          <DataField>ClusterID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ClusterName">
+          <DataField>ClusterName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="SignalWaits">
+      <Query>
+        <DataSourceName>ServerAnalysisDW</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@LocationID">
+            <Value>=Parameters!LocationID.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ClusterID">
+            <Value>=Parameters!ClusterID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select DateKey, TimeKey, SignalWaits
+from [Analysis].[pcv_SignalWaits_Latest]
+where LocationID = @LocationID and ClusterID = @ClusterID</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="DateKey">
+          <DataField>DateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TimeKey">
+          <DataField>TimeKey</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SignalWaits">
+          <DataField>SignalWaits</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.83333in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Signal Waits</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>=Switch(Sum(Fields!SignalWaits.Value) &lt; 20,"Green",
+Sum(Fields!SignalWaits.Value)&gt; 20 and Sum(Fields!SignalWaits.Value) &lt; 40,"Gold",
+Sum(Fields!SignalWaits.Value) &gt; 40,"Maroon")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.70833in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CPUpercent">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>= Sum(Fields!SignalWaits.Value, "SignalWaits").ToString + "%"</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                    <FontSize>36pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CPUpercent</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>=Switch(Sum(Fields!SignalWaits.Value) &lt; 20,"Green",
+Sum(Fields!SignalWaits.Value)&gt; 20 and Sum(Fields!SignalWaits.Value) &lt; 40,"Gold",
+Sum(Fields!SignalWaits.Value) &gt; 40,"Maroon")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>SignalWaits</DataSetName>
+            <Height>0.95833in</Height>
+            <Width>1.83333in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+                <Width>0.25pt</Width>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>0.95833in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>Black</BackgroundColor>
+        </Style>
+      </Body>
+      <Width>1.83333in</Width>
+      <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationID">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>101874</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Location</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Locations</DataSetName>
+          <ValueField>LocationID</ValueField>
+          <LabelField>LocactionName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="ClusterID">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>701</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Cluster (server) Name</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Clusters</DataSetName>
+          <ValueField>ClusterID</ValueField>
+          <LabelField>ClusterName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationID</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ClusterID</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>611ff07b-67bb-4124-a80d-0c08905ce7c8</rd:ReportID>
+</Report>

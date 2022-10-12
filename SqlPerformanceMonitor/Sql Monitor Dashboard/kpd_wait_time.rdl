@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="ServerAnalysisDW">
+      <DataSourceReference>ServerAnalysisDW</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>9ee90478-a3a2-420a-9eb7-d731ec371650</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Locations">
+      <SharedDataSet>
+        <SharedDataSetReference>Locations</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="LocationID">
+          <DataField>LocationID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="LocactionName">
+          <DataField>LocactionName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="Clusters">
+      <SharedDataSet>
+        <SharedDataSetReference>Clusters</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="@LocationID">
+            <Value>=Parameters!LocationID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="ClusterID">
+          <DataField>ClusterID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ClusterName">
+          <DataField>ClusterName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="WaitTime">
+      <Query>
+        <DataSourceName>ServerAnalysisDW</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@LocationID">
+            <Value>=Parameters!LocationID.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ClusterID">
+            <Value>=Parameters!ClusterID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>select DateKey, TimeKey, WaitAverage
+from [Analysis].[pcv_WaitDurationMs_Latest]
+where LocationID = @LocationID and ClusterID = @ClusterID</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="DateKey">
+          <DataField>DateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TimeKey">
+          <DataField>TimeKey</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WaitAverage">
+          <DataField>WaitAverage</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <GaugePanel Name="GaugePanel3">
+            <RadialGauges>
+              <RadialGauge Name="RadialGauge1">
+                <PivotY>85</PivotY>
+                <GaugeScales>
+                  <RadialScale Name="RadialScale1">
+                    <Radius>55</Radius>
+                    <StartAngle>90</StartAngle>
+                    <SweepAngle>180</SweepAngle>
+                    <GaugePointers>
+                      <RadialPointer Name="RadialPointer1">
+                        <Type>Bar</Type>
+                        <PointerCap>
+                          <Style>
+                            <BackgroundColor>White</BackgroundColor>
+                            <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                            <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                            <FontFamily>Arial</FontFamily>
+                            <BackgroundHatchType>None</BackgroundHatchType>
+                          </Style>
+                          <CapImage>
+                            <OffsetX>0pt</OffsetX>
+                            <OffsetY>0pt</OffsetY>
+                            <Source>External</Source>
+                            <Value />
+                          </CapImage>
+                          <OnTop>true</OnTop>
+                          <CapStyle>RoundedWithWideIndentation</CapStyle>
+                          <Width>33</Width>
+                        </PointerCap>
+                        <NeedleStyle>Tapered</NeedleStyle>
+                        <Style>
+                          <Border>
+                            <Style>None</Style>
+                          </Border>
+                          <BackgroundColor>=Switch(Sum(Fields!WaitAverage.Value) &lt; 1000,"Green",
+Sum(Fields!WaitAverage.Value) &gt; 1000 and Sum(Fields!WaitAverage.Value) &lt; 2500,"Gold",
+Sum(Fields!WaitAverage.Value) &gt; 2500,"Maroon")</BackgroundColor>
+                          <BackgroundGradientType>None</BackgroundGradientType>
+                          <BackgroundGradientEndColor>Orange</BackgroundGradientEndColor>
+                          <BackgroundHatchType>None</BackgroundHatchType>
+                          <ShadowOffset>0pt</ShadowOffset>
+                        </Style>
+                        <GaugeInputValue>
+                          <Value>=Sum(Fields!WaitAverage.Value)</Value>
+                          <Multiplier>1</Multiplier>
+                        </GaugeInputValue>
+                        <PointerImage>
+                          <OffsetX>0pt</OffsetX>
+                          <OffsetY>0pt</OffsetY>
+                          <Source>External</Source>
+                          <Value />
+                        </PointerImage>
+                        <MarkerLength>25</MarkerLength>
+                        <MarkerStyle>Wedge</MarkerStyle>
+                        <Placement>Cross</Placement>
+                        <Width>18</Width>
+                      </RadialPointer>
+                    </GaugePointers>
+                    <Style>
+                      <Border>
+                        <Style>None</Style>
+                      </Border>
+                      <BackgroundColor>DimGray</BackgroundColor>
+                      <BackgroundGradientType>None</BackgroundGradientType>
+                      <BackgroundGradientEndColor>White</BackgroundGradientEndColor>
+                      <BackgroundHatchType>None</BackgroundHatchType>
+                      <ShadowOffset>0pt</ShadowOffset>
+                    </Style>
+                    <Interval>1000</Interval>
+                    <IntervalOffset>NaN</IntervalOffset>
+                    <MaximumValue>
+                      <Value>5000</Value>
+                      <Multiplier>1</Multiplier>
+                    </MaximumValue>
+                    <MinimumValue>
+                      <Value>0</Value>
+                      <Multiplier>1</Multiplier>
+                    </MinimumValue>
+                    <GaugeMajorTickMarks>
+                      <Interval>NaN</Interval>
+                      <IntervalOffset>NaN</IntervalOffset>
+                      <Style>
+                        <Border>
+                          <Color>DimGray</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                      </Style>
+                      <Placement>Cross</Placement>
+                      <TickMarkImage>
+                        <Source>External</Source>
+                        <Value />
+                      </TickMarkImage>
+                      <Length>14</Length>
+                      <Width>8</Width>
+                      <Shape>Trapezoid</Shape>
+                      <Hidden>true</Hidden>
+                    </GaugeMajorTickMarks>
+                    <GaugeMinorTickMarks>
+                      <Interval>NaN</Interval>
+                      <IntervalOffset>NaN</IntervalOffset>
+                      <Style>
+                        <Border>
+                          <Color>DimGray</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                      </Style>
+                      <Placement>Cross</Placement>
+                      <TickMarkImage>
+                        <Source>External</Source>
+                        <Value />
+                      </TickMarkImage>
+                      <Length>8</Length>
+                      <Width>3</Width>
+                      <Hidden>true</Hidden>
+                    </GaugeMinorTickMarks>
+                    <MaximumPin>
+                      <PinLabel>
+                        <Style>
+                          <FontSize>12pt</FontSize>
+                        </Style>
+                        <DistanceFromScale>0</DistanceFromScale>
+                      </PinLabel>
+                      <Style>
+                        <Border>
+                          <Color>DimGray</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                      </Style>
+                      <Placement>Cross</Placement>
+                      <TickMarkImage>
+                        <Source>External</Source>
+                        <Value />
+                      </TickMarkImage>
+                      <Length>6</Length>
+                      <Width>6</Width>
+                      <Shape>Circle</Shape>
+                    </MaximumPin>
+                    <MinimumPin>
+                      <PinLabel>
+                        <Style>
+                          <FontSize>12pt</FontSize>
+                        </Style>
+                        <DistanceFromScale>0</DistanceFromScale>
+                      </PinLabel>
+                      <Style>
+                        <Border>
+                          <Color>DimGray</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>WhiteSmoke</BackgroundColor>
+                      </Style>
+                      <Placement>Cross</Placement>
+                      <TickMarkImage>
+                        <Source>External</Source>
+                        <Value />
+                      </TickMarkImage>
+                      <Length>6</Length>
+                      <Width>6</Width>
+                      <Shape>Circle</Shape>
+                    </MinimumPin>
+                    <ScaleLabels>
+                      <Style>
+                        <FontSize>14pt</FontSize>
+                      </Style>
+                      <Interval>NaN</Interval>
+                      <IntervalOffset>NaN</IntervalOffset>
+                      <DistanceFromScale>0</DistanceFromScale>
+                      <Placement>Outside</Placement>
+                      <ShowEndLabels>true</ShowEndLabels>
+                      <UseFontPercent>true</UseFontPercent>
+                    </ScaleLabels>
+                    <Width>15</Width>
+                  </RadialScale>
+                </GaugeScales>
+                <BackFrame>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <BackgroundColor>WhiteSmoke</BackgroundColor>
+                    <BackgroundGradientType>None</BackgroundGradientType>
+                    <BackgroundGradientEndColor>Gainsboro</BackgroundGradientEndColor>
+                    <BackgroundHatchType>None</BackgroundHatchType>
+                    <ShadowOffset>0pt</ShadowOffset>
+                  </Style>
+                  <FrameShape>CustomSemiCircularN1</FrameShape>
+                  <FrameBackground>
+                    <Style>
+                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                      <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                      <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                      <BackgroundHatchType>None</BackgroundHatchType>
+                    </Style>
+                  </FrameBackground>
+                  <FrameImage>
+                    <Source>External</Source>
+                    <Value />
+                  </FrameImage>
+                </BackFrame>
+                <ClipContent>true</ClipContent>
+                <TopImage>
+                  <Source>External</Source>
+                  <Value />
+                </TopImage>
+                <AspectRatio>1.48</AspectRatio>
+                <Height>100</Height>
+                <Width>100</Width>
+              </RadialGauge>
+            </RadialGauges>
+            <GaugeLabels>
+              <GaugeLabel Name="GaugeLabel1">
+                <Text>=Sum(Fields!WaitAverage.Value, "WaitTime").ToString + "ms"</Text>
+                <TextShadowOffset>0pt</TextShadowOffset>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BackgroundColor>#00ffffff</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <BackgroundGradientEndColor>#00ffffff</BackgroundGradientEndColor>
+                  <FontFamily>Segoe UI Semibold</FontFamily>
+                  <FontSize>16pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextAlign>Center</TextAlign>
+                  <VerticalAlign>Bottom</VerticalAlign>
+                  <Color>=Switch(Sum(Fields!WaitAverage.Value) &lt; 1000,"Green",
+Sum(Fields!WaitAverage.Value) &gt; 1000 and Sum(Fields!WaitAverage.Value) &lt; 2500,"Gold",
+Sum(Fields!WaitAverage.Value) &gt; 2500,"Maroon")</Color>
+                  <ShadowOffset>0pt</ShadowOffset>
+                </Style>
+                <Top>53.1249961853027</Top>
+                <Left>15.6249980926514</Left>
+                <Height>30</Height>
+                <Width>70</Width>
+                <ParentItem>RadialGauges.RadialGauge1</ParentItem>
+              </GaugeLabel>
+            </GaugeLabels>
+            <AutoLayout>true</AutoLayout>
+            <BackFrame>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BackgroundColor>Gainsboro</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                <BackgroundHatchType>None</BackgroundHatchType>
+                <ShadowOffset>0pt</ShadowOffset>
+              </Style>
+              <FrameBackground>
+                <Style>
+                  <BackgroundColor>Silver</BackgroundColor>
+                  <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                  <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                  <BackgroundHatchType>None</BackgroundHatchType>
+                </Style>
+              </FrameBackground>
+              <FrameImage>
+                <Source>External</Source>
+                <Value />
+              </FrameImage>
+            </BackFrame>
+            <TopImage>
+              <Source>External</Source>
+              <Value />
+            </TopImage>
+            <DataSetName>WaitTime</DataSetName>
+            <Top>0.26389in</Top>
+            <Height>1.02083in</Height>
+            <Width>1.58333in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Black</BackgroundColor>
+            </Style>
+          </GaugePanel>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Wait Time</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>LightGrey</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Height>0.23611in</Height>
+            <Width>1in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>1.28472in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>Black</BackgroundColor>
+        </Style>
+      </Body>
+      <Width>1.58333in</Width>
+      <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationID">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>101874</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Location</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Locations</DataSetName>
+          <ValueField>LocationID</ValueField>
+          <LabelField>LocactionName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="ClusterID">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>701</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Cluster (server) Name</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Clusters</DataSetName>
+          <ValueField>ClusterID</ValueField>
+          <LabelField>ClusterName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationID</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ClusterID</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>611ff07b-67bb-4124-a80d-0c08905ce7c8</rd:ReportID>
+</Report>

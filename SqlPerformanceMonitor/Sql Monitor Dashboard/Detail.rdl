@@ -1,0 +1,3396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="ServerAnalysisDW">
+      <DataSourceReference>ServerAnalysisDW</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>2cfa0bfb-ff9a-447a-a973-509d2d5fada7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="InstnaceOverview">
+      <Query>
+        <DataSourceName>ServerAnalysisDW</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@LocationID">
+            <Value>=Parameters!LocationID.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ClusterID">
+            <Value>=Parameters!ClusterID.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandType>StoredProcedure</CommandType>
+        <CommandText>Analysis.PerfCounter_Rpt_Instance_Overview</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="LocationID">
+          <DataField>LocationID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ClusterID">
+          <DataField>ClusterID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ClusterName">
+          <DataField>ClusterName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClusterFullName">
+          <DataField>ClusterFullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClusterStatus">
+          <DataField>ClusterStatus</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CpuPercent">
+          <DataField>CpuPercent</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SignalWaits">
+          <DataField>SignalWaits</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DiscLatencyMs">
+          <DataField>DiscLatencyMs</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MemoryInstPercentInUse">
+          <DataField>MemoryInstPercentInUse</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DiskSpacePercentInUse">
+          <DataField>DiskSpacePercentInUse</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RunDuration">
+          <DataField>RunDuration</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DiscWatchList">
+          <DataField>DiscWatchList</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SQL Server Instance Stats</Value>
+                    <Style>
+                      <FontFamily>MS Reference Sans Serif</FontFamily>
+                      <FontSize>20pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Height>0.56597in</Height>
+            <Width>6.86458in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.76042in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.53125in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>CPU (%)</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Waits (%)</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Latency (ms)</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox15">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Memory (%)</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox15</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox17">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Disk Space (%)</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox17</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Disk Space Low</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.67708in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ClusterFullName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=(VbCrlf &amp; REPLACE(Fields!ClusterFullName.Value,"(",(VbCrlf &amp; "(")))</Value>
+                                  <Style>
+                                    <FontFamily>Microsoft Sans Serif</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ClusterFullName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>6pt</Width>
+                            </Border>
+                            <BackgroundColor>=Switch(Fields!ClusterStatus.Value = "UP","Green",
+Fields!ClusterStatus.Value = "DOWN","Maroon")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ClusterStatus">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Switch(Fields!ClusterStatus.Value = "UP",(VbCrLf &amp;  "UP"),
+Fields!ClusterStatus.Value = "DOWN",(VbCrLf &amp;  "DOWN"))</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                    <FontSize>16pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Switch(Fields!ClusterStatus.Value = "UP",(VbCrLf &amp; Fields!RunDuration.Value),
+Fields!ClusterStatus.Value = "DOWN",(VbCrLf))</Value>
+                                  <Style>
+                                    <FontFamily>Arial Narrow</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ClusterStatus</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>6pt</Width>
+                            </Border>
+                            <BackgroundColor>=Switch(left(Fields!ClusterStatus.Value.ToString,2) = "UP","Green",
+Fields!ClusterStatus.Value = "DOWN","Maroon")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <GaugePanel Name="WaitSignal2">
+                          <RadialGauges>
+                            <RadialGauge Name="RadialGauge1">
+                              <PivotY>85</PivotY>
+                              <GaugeScales>
+                                <RadialScale Name="RadialScale1">
+                                  <Radius>55</Radius>
+                                  <StartAngle>90</StartAngle>
+                                  <SweepAngle>180</SweepAngle>
+                                  <GaugePointers>
+                                    <RadialPointer Name="RadialPointer1">
+                                      <Type>Bar</Type>
+                                      <PointerCap>
+                                        <Style>
+                                          <BackgroundColor>White</BackgroundColor>
+                                          <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                          <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                                          <FontFamily>Arial</FontFamily>
+                                          <BackgroundHatchType>None</BackgroundHatchType>
+                                        </Style>
+                                        <CapImage>
+                                          <OffsetX>0pt</OffsetX>
+                                          <OffsetY>0pt</OffsetY>
+                                          <Source>External</Source>
+                                          <Value />
+                                        </CapImage>
+                                        <OnTop>true</OnTop>
+                                        <CapStyle>RoundedWithWideIndentation</CapStyle>
+                                        <Width>33</Width>
+                                      </PointerCap>
+                                      <NeedleStyle>Tapered</NeedleStyle>
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <BackgroundColor>=Switch(Fields!CpuPercent.Value &lt; 75,"Green",
+Fields!CpuPercent.Value &gt; 75 and Fields!CpuPercent.Value &lt; 90,"Gold",
+Fields!CpuPercent.Value &gt; 90,"Maroon")</BackgroundColor>
+                                        <BackgroundGradientType>None</BackgroundGradientType>
+                                        <BackgroundGradientEndColor>Orange</BackgroundGradientEndColor>
+                                        <BackgroundHatchType>None</BackgroundHatchType>
+                                        <ShadowOffset>0pt</ShadowOffset>
+                                      </Style>
+                                      <GaugeInputValue>
+                                        <Value>=Fields!CpuPercent.Value</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </GaugeInputValue>
+                                      <PointerImage>
+                                        <OffsetX>0pt</OffsetX>
+                                        <OffsetY>0pt</OffsetY>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </PointerImage>
+                                      <MarkerLength>25</MarkerLength>
+                                      <MarkerStyle>Wedge</MarkerStyle>
+                                      <Placement>Cross</Placement>
+                                      <Width>18</Width>
+                                    </RadialPointer>
+                                  </GaugePointers>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <BackgroundColor>DimGray</BackgroundColor>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>White</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Interval>50</Interval>
+                                  <IntervalOffset>NaN</IntervalOffset>
+                                  <MaximumValue>
+                                    <Value>100</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <MinimumValue>
+                                    <Value>0</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <GaugeMajorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>14</Length>
+                                    <Width>8</Width>
+                                    <Shape>Trapezoid</Shape>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMajorTickMarks>
+                                  <GaugeMinorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>8</Length>
+                                    <Width>3</Width>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMinorTickMarks>
+                                  <MaximumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MaximumPin>
+                                  <MinimumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MinimumPin>
+                                  <ScaleLabels>
+                                    <Style>
+                                      <FontSize>14pt</FontSize>
+                                    </Style>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <DistanceFromScale>0</DistanceFromScale>
+                                    <Placement>Outside</Placement>
+                                    <ShowEndLabels>true</ShowEndLabels>
+                                    <UseFontPercent>true</UseFontPercent>
+                                  </ScaleLabels>
+                                  <Width>15</Width>
+                                </RadialScale>
+                              </GaugeScales>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gainsboro</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameShape>CustomSemiCircularN1</FrameShape>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <ClipContent>true</ClipContent>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <AspectRatio>1.48</AspectRatio>
+                              <Height>100</Height>
+                              <Width>100</Width>
+                            </RadialGauge>
+                          </RadialGauges>
+                          <GaugeLabels>
+                            <GaugeLabel Name="GaugeLabel1">
+                              <Text>=Fields!CpuPercent.Value</Text>
+                              <TextShadowOffset>0pt</TextShadowOffset>
+                              <UseFontPercent>true</UseFontPercent>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>#00ffffff</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                                <BackgroundGradientEndColor>#00ffffff</BackgroundGradientEndColor>
+                                <FontFamily>Segoe UI Semibold</FontFamily>
+                                <FontSize>14pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <TextAlign>Center</TextAlign>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <Color>=Switch(Fields!CpuPercent.Value &lt; 75,"Green",
+Fields!CpuPercent.Value &gt; 75 and Fields!CpuPercent.Value &lt; 90,"Gold",
+Fields!CpuPercent.Value &gt; 90,"Maroon")</Color>
+                                <ShadowOffset>0pt</ShadowOffset>
+                              </Style>
+                              <Top>50</Top>
+                              <Left>30</Left>
+                              <Height>40</Height>
+                              <Width>40</Width>
+                              <ParentItem>RadialGauges.RadialGauge1</ParentItem>
+                            </GaugeLabel>
+                          </GaugeLabels>
+                          <AutoLayout>true</AutoLayout>
+                          <BackFrame>
+                            <Style>
+                              <Border>
+                                <Style>None</Style>
+                              </Border>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
+                              <BackgroundGradientType>None</BackgroundGradientType>
+                              <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                              <BackgroundHatchType>None</BackgroundHatchType>
+                              <ShadowOffset>0pt</ShadowOffset>
+                            </Style>
+                            <FrameBackground>
+                              <Style>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                <BackgroundHatchType>None</BackgroundHatchType>
+                              </Style>
+                            </FrameBackground>
+                            <FrameImage>
+                              <Source>External</Source>
+                              <Value />
+                            </FrameImage>
+                          </BackFrame>
+                          <TopImage>
+                            <Source>External</Source>
+                            <Value />
+                          </TopImage>
+                          <DataSetName>InstnaceOverview</DataSetName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                          </Style>
+                        </GaugePanel>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <GaugePanel Name="WaitSignal">
+                          <RadialGauges>
+                            <RadialGauge Name="RadialGauge1">
+                              <PivotY>85</PivotY>
+                              <GaugeScales>
+                                <RadialScale Name="RadialScale1">
+                                  <Radius>55</Radius>
+                                  <StartAngle>90</StartAngle>
+                                  <SweepAngle>180</SweepAngle>
+                                  <GaugePointers>
+                                    <RadialPointer Name="RadialPointer1">
+                                      <Type>Bar</Type>
+                                      <PointerCap>
+                                        <Style>
+                                          <BackgroundColor>White</BackgroundColor>
+                                          <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                          <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                                          <FontFamily>Arial</FontFamily>
+                                          <BackgroundHatchType>None</BackgroundHatchType>
+                                        </Style>
+                                        <CapImage>
+                                          <OffsetX>0pt</OffsetX>
+                                          <OffsetY>0pt</OffsetY>
+                                          <Source>External</Source>
+                                          <Value />
+                                        </CapImage>
+                                        <OnTop>true</OnTop>
+                                        <CapStyle>RoundedWithWideIndentation</CapStyle>
+                                        <Width>33</Width>
+                                      </PointerCap>
+                                      <NeedleStyle>Tapered</NeedleStyle>
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <BackgroundColor>=Switch(Fields!SignalWaits.Value &lt; 20,"Green",
+Fields!SignalWaits.Value &gt; 20 and Fields!SignalWaits.Value &lt; 40,"Gold",
+Fields!SignalWaits.Value &gt; 40,"Maroon")</BackgroundColor>
+                                        <BackgroundGradientType>None</BackgroundGradientType>
+                                        <BackgroundGradientEndColor>Orange</BackgroundGradientEndColor>
+                                        <BackgroundHatchType>None</BackgroundHatchType>
+                                        <ShadowOffset>0pt</ShadowOffset>
+                                      </Style>
+                                      <GaugeInputValue>
+                                        <Value>=Fields!SignalWaits.Value</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </GaugeInputValue>
+                                      <PointerImage>
+                                        <OffsetX>0pt</OffsetX>
+                                        <OffsetY>0pt</OffsetY>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </PointerImage>
+                                      <MarkerLength>25</MarkerLength>
+                                      <MarkerStyle>Wedge</MarkerStyle>
+                                      <Placement>Cross</Placement>
+                                      <Width>18</Width>
+                                    </RadialPointer>
+                                  </GaugePointers>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <BackgroundColor>DimGray</BackgroundColor>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>White</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Interval>50</Interval>
+                                  <IntervalOffset>NaN</IntervalOffset>
+                                  <MaximumValue>
+                                    <Value>100</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <MinimumValue>
+                                    <Value>0</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <GaugeMajorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>14</Length>
+                                    <Width>8</Width>
+                                    <Shape>Trapezoid</Shape>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMajorTickMarks>
+                                  <GaugeMinorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>8</Length>
+                                    <Width>3</Width>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMinorTickMarks>
+                                  <MaximumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MaximumPin>
+                                  <MinimumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MinimumPin>
+                                  <ScaleLabels>
+                                    <Style>
+                                      <FontSize>14pt</FontSize>
+                                    </Style>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <DistanceFromScale>0</DistanceFromScale>
+                                    <Placement>Outside</Placement>
+                                    <ShowEndLabels>true</ShowEndLabels>
+                                    <UseFontPercent>true</UseFontPercent>
+                                  </ScaleLabels>
+                                  <Width>15</Width>
+                                </RadialScale>
+                              </GaugeScales>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gainsboro</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameShape>CustomSemiCircularN1</FrameShape>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <ClipContent>true</ClipContent>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <AspectRatio>1.48</AspectRatio>
+                              <Height>100</Height>
+                              <Width>100</Width>
+                            </RadialGauge>
+                          </RadialGauges>
+                          <GaugeLabels>
+                            <GaugeLabel Name="GaugeLabel1">
+                              <Text>=Fields!SignalWaits.Value</Text>
+                              <TextShadowOffset>0pt</TextShadowOffset>
+                              <UseFontPercent>true</UseFontPercent>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>#00ffffff</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                                <BackgroundGradientEndColor>#00ffffff</BackgroundGradientEndColor>
+                                <FontFamily>Segoe UI Semibold</FontFamily>
+                                <FontSize>14pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <TextAlign>Center</TextAlign>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <Color>=Switch(Fields!SignalWaits.Value &lt; 20,"Green",
+Fields!SignalWaits.Value &gt; 20 and Fields!SignalWaits.Value &lt; 40,"Gold",
+Fields!SignalWaits.Value &gt; 40,"Maroon")</Color>
+                                <ShadowOffset>0pt</ShadowOffset>
+                              </Style>
+                              <Top>50</Top>
+                              <Left>30</Left>
+                              <Height>40</Height>
+                              <Width>40</Width>
+                              <ParentItem>RadialGauges.RadialGauge1</ParentItem>
+                            </GaugeLabel>
+                          </GaugeLabels>
+                          <AutoLayout>true</AutoLayout>
+                          <BackFrame>
+                            <Style>
+                              <Border>
+                                <Style>None</Style>
+                              </Border>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
+                              <BackgroundGradientType>None</BackgroundGradientType>
+                              <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                              <BackgroundHatchType>None</BackgroundHatchType>
+                              <ShadowOffset>0pt</ShadowOffset>
+                            </Style>
+                            <FrameBackground>
+                              <Style>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                <BackgroundHatchType>None</BackgroundHatchType>
+                              </Style>
+                            </FrameBackground>
+                            <FrameImage>
+                              <Source>External</Source>
+                              <Value />
+                            </FrameImage>
+                          </BackFrame>
+                          <TopImage>
+                            <Source>External</Source>
+                            <Value />
+                          </TopImage>
+                          <DataSetName>InstnaceOverview</DataSetName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                          </Style>
+                        </GaugePanel>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <GaugePanel Name="WaitSignal3">
+                          <RadialGauges>
+                            <RadialGauge Name="RadialGauge1">
+                              <PivotY>85</PivotY>
+                              <GaugeScales>
+                                <RadialScale Name="RadialScale1">
+                                  <Radius>55</Radius>
+                                  <StartAngle>90</StartAngle>
+                                  <SweepAngle>180</SweepAngle>
+                                  <GaugePointers>
+                                    <RadialPointer Name="RadialPointer1">
+                                      <Type>Bar</Type>
+                                      <PointerCap>
+                                        <Style>
+                                          <BackgroundColor>White</BackgroundColor>
+                                          <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                          <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                                          <FontFamily>Arial</FontFamily>
+                                          <BackgroundHatchType>None</BackgroundHatchType>
+                                        </Style>
+                                        <CapImage>
+                                          <OffsetX>0pt</OffsetX>
+                                          <OffsetY>0pt</OffsetY>
+                                          <Source>External</Source>
+                                          <Value />
+                                        </CapImage>
+                                        <OnTop>true</OnTop>
+                                        <CapStyle>RoundedWithWideIndentation</CapStyle>
+                                        <Width>33</Width>
+                                      </PointerCap>
+                                      <NeedleStyle>Tapered</NeedleStyle>
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <BackgroundColor>=Switch(Fields!DiscLatencyMs.Value &lt; 20,"Green",
+Fields!DiscLatencyMs.Value &gt; 20 and Fields!DiscLatencyMs.Value &lt; 40,"Gold",
+Fields!DiscLatencyMs.Value &gt; 40,"Maroon")</BackgroundColor>
+                                        <BackgroundGradientType>None</BackgroundGradientType>
+                                        <BackgroundGradientEndColor>Orange</BackgroundGradientEndColor>
+                                        <BackgroundHatchType>None</BackgroundHatchType>
+                                        <ShadowOffset>0pt</ShadowOffset>
+                                      </Style>
+                                      <GaugeInputValue>
+                                        <Value>=Fields!DiscLatencyMs.Value</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </GaugeInputValue>
+                                      <PointerImage>
+                                        <OffsetX>0pt</OffsetX>
+                                        <OffsetY>0pt</OffsetY>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </PointerImage>
+                                      <MarkerLength>25</MarkerLength>
+                                      <MarkerStyle>Wedge</MarkerStyle>
+                                      <Placement>Cross</Placement>
+                                      <Width>18</Width>
+                                    </RadialPointer>
+                                  </GaugePointers>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <BackgroundColor>DimGray</BackgroundColor>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>White</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Interval>50</Interval>
+                                  <IntervalOffset>NaN</IntervalOffset>
+                                  <MaximumValue>
+                                    <Value>100</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <MinimumValue>
+                                    <Value>0</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <GaugeMajorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>14</Length>
+                                    <Width>8</Width>
+                                    <Shape>Trapezoid</Shape>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMajorTickMarks>
+                                  <GaugeMinorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>8</Length>
+                                    <Width>3</Width>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMinorTickMarks>
+                                  <MaximumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MaximumPin>
+                                  <MinimumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MinimumPin>
+                                  <ScaleLabels>
+                                    <Style>
+                                      <FontSize>14pt</FontSize>
+                                    </Style>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <DistanceFromScale>0</DistanceFromScale>
+                                    <Placement>Outside</Placement>
+                                    <ShowEndLabels>true</ShowEndLabels>
+                                    <UseFontPercent>true</UseFontPercent>
+                                  </ScaleLabels>
+                                  <Width>15</Width>
+                                </RadialScale>
+                              </GaugeScales>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gainsboro</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameShape>CustomSemiCircularN1</FrameShape>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <ClipContent>true</ClipContent>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <AspectRatio>1.48</AspectRatio>
+                              <Height>100</Height>
+                              <Width>100</Width>
+                            </RadialGauge>
+                          </RadialGauges>
+                          <GaugeLabels>
+                            <GaugeLabel Name="GaugeLabel1">
+                              <Text>=Fields!DiscLatencyMs.Value</Text>
+                              <TextShadowOffset>0pt</TextShadowOffset>
+                              <UseFontPercent>true</UseFontPercent>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>#00ffffff</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                                <BackgroundGradientEndColor>#00ffffff</BackgroundGradientEndColor>
+                                <FontFamily>Segoe UI Semibold</FontFamily>
+                                <FontSize>14pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <TextAlign>Center</TextAlign>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <Color>=Switch(Fields!DiscLatencyMs.Value &lt; 20,"Green",
+Fields!DiscLatencyMs.Value &gt; 20 and Fields!DiscLatencyMs.Value &lt; 40,"Gold",
+Fields!DiscLatencyMs.Value &gt; 40,"Maroon")</Color>
+                                <ShadowOffset>0pt</ShadowOffset>
+                              </Style>
+                              <Top>50</Top>
+                              <Left>30</Left>
+                              <Height>40</Height>
+                              <Width>40</Width>
+                              <ParentItem>RadialGauges.RadialGauge1</ParentItem>
+                            </GaugeLabel>
+                          </GaugeLabels>
+                          <AutoLayout>true</AutoLayout>
+                          <BackFrame>
+                            <Style>
+                              <Border>
+                                <Style>None</Style>
+                              </Border>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
+                              <BackgroundGradientType>None</BackgroundGradientType>
+                              <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                              <BackgroundHatchType>None</BackgroundHatchType>
+                              <ShadowOffset>0pt</ShadowOffset>
+                            </Style>
+                            <FrameBackground>
+                              <Style>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                <BackgroundHatchType>None</BackgroundHatchType>
+                              </Style>
+                            </FrameBackground>
+                            <FrameImage>
+                              <Source>External</Source>
+                              <Value />
+                            </FrameImage>
+                          </BackFrame>
+                          <TopImage>
+                            <Source>External</Source>
+                            <Value />
+                          </TopImage>
+                          <DataSetName>InstnaceOverview</DataSetName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                          </Style>
+                        </GaugePanel>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <GaugePanel Name="WaitSignal4">
+                          <RadialGauges>
+                            <RadialGauge Name="RadialGauge1">
+                              <PivotY>85</PivotY>
+                              <GaugeScales>
+                                <RadialScale Name="RadialScale1">
+                                  <Radius>55</Radius>
+                                  <StartAngle>90</StartAngle>
+                                  <SweepAngle>180</SweepAngle>
+                                  <GaugePointers>
+                                    <RadialPointer Name="RadialPointer1">
+                                      <Type>Bar</Type>
+                                      <PointerCap>
+                                        <Style>
+                                          <BackgroundColor>White</BackgroundColor>
+                                          <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                          <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                                          <FontFamily>Arial</FontFamily>
+                                          <BackgroundHatchType>None</BackgroundHatchType>
+                                        </Style>
+                                        <CapImage>
+                                          <OffsetX>0pt</OffsetX>
+                                          <OffsetY>0pt</OffsetY>
+                                          <Source>External</Source>
+                                          <Value />
+                                        </CapImage>
+                                        <OnTop>true</OnTop>
+                                        <CapStyle>RoundedWithWideIndentation</CapStyle>
+                                        <Width>33</Width>
+                                      </PointerCap>
+                                      <NeedleStyle>Tapered</NeedleStyle>
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <BackgroundColor>=Switch(Fields!MemoryInstPercentInUse.Value &lt; 80,"Green",
+Fields!MemoryInstPercentInUse.Value &gt; 80 and Fields!MemoryInstPercentInUse.Value &lt; 90,"Gold",
+Fields!MemoryInstPercentInUse.Value &gt; 90,"Maroon")</BackgroundColor>
+                                        <BackgroundGradientType>None</BackgroundGradientType>
+                                        <BackgroundGradientEndColor>Orange</BackgroundGradientEndColor>
+                                        <BackgroundHatchType>None</BackgroundHatchType>
+                                        <ShadowOffset>0pt</ShadowOffset>
+                                      </Style>
+                                      <GaugeInputValue>
+                                        <Value>=Fields!MemoryInstPercentInUse.Value</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </GaugeInputValue>
+                                      <PointerImage>
+                                        <OffsetX>0pt</OffsetX>
+                                        <OffsetY>0pt</OffsetY>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </PointerImage>
+                                      <MarkerLength>25</MarkerLength>
+                                      <MarkerStyle>Wedge</MarkerStyle>
+                                      <Placement>Cross</Placement>
+                                      <Width>18</Width>
+                                    </RadialPointer>
+                                  </GaugePointers>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <BackgroundColor>DimGray</BackgroundColor>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>White</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Interval>50</Interval>
+                                  <IntervalOffset>NaN</IntervalOffset>
+                                  <MaximumValue>
+                                    <Value>100</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <MinimumValue>
+                                    <Value>0</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <GaugeMajorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>14</Length>
+                                    <Width>8</Width>
+                                    <Shape>Trapezoid</Shape>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMajorTickMarks>
+                                  <GaugeMinorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>8</Length>
+                                    <Width>3</Width>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMinorTickMarks>
+                                  <MaximumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MaximumPin>
+                                  <MinimumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MinimumPin>
+                                  <ScaleLabels>
+                                    <Style>
+                                      <FontSize>14pt</FontSize>
+                                    </Style>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <DistanceFromScale>0</DistanceFromScale>
+                                    <Placement>Outside</Placement>
+                                    <ShowEndLabels>true</ShowEndLabels>
+                                    <UseFontPercent>true</UseFontPercent>
+                                  </ScaleLabels>
+                                  <Width>15</Width>
+                                </RadialScale>
+                              </GaugeScales>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gainsboro</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameShape>CustomSemiCircularN1</FrameShape>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <ClipContent>true</ClipContent>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <AspectRatio>1.48</AspectRatio>
+                              <Height>100</Height>
+                              <Width>100</Width>
+                            </RadialGauge>
+                          </RadialGauges>
+                          <GaugeLabels>
+                            <GaugeLabel Name="GaugeLabel1">
+                              <Text>=Fields!MemoryInstPercentInUse.Value</Text>
+                              <TextShadowOffset>0pt</TextShadowOffset>
+                              <UseFontPercent>true</UseFontPercent>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>#00ffffff</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                                <BackgroundGradientEndColor>#00ffffff</BackgroundGradientEndColor>
+                                <FontFamily>Segoe UI Semibold</FontFamily>
+                                <FontSize>14pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <TextAlign>Center</TextAlign>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <Color>=Switch(Fields!MemoryInstPercentInUse.Value &lt; 80,"Green",
+Fields!MemoryInstPercentInUse.Value &gt; 80 and Fields!MemoryInstPercentInUse.Value &lt; 90,"Gold",
+Fields!MemoryInstPercentInUse.Value &gt; 90,"Maroon")</Color>
+                                <ShadowOffset>0pt</ShadowOffset>
+                              </Style>
+                              <Top>50</Top>
+                              <Left>30</Left>
+                              <Height>40</Height>
+                              <Width>40</Width>
+                              <ParentItem>RadialGauges.RadialGauge1</ParentItem>
+                            </GaugeLabel>
+                          </GaugeLabels>
+                          <AutoLayout>true</AutoLayout>
+                          <BackFrame>
+                            <Style>
+                              <Border>
+                                <Style>None</Style>
+                              </Border>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
+                              <BackgroundGradientType>None</BackgroundGradientType>
+                              <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                              <BackgroundHatchType>None</BackgroundHatchType>
+                              <ShadowOffset>0pt</ShadowOffset>
+                            </Style>
+                            <FrameBackground>
+                              <Style>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                <BackgroundHatchType>None</BackgroundHatchType>
+                              </Style>
+                            </FrameBackground>
+                            <FrameImage>
+                              <Source>External</Source>
+                              <Value />
+                            </FrameImage>
+                          </BackFrame>
+                          <TopImage>
+                            <Source>External</Source>
+                            <Value />
+                          </TopImage>
+                          <DataSetName>InstnaceOverview</DataSetName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                          </Style>
+                        </GaugePanel>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <GaugePanel Name="WaitSignal5">
+                          <RadialGauges>
+                            <RadialGauge Name="RadialGauge1">
+                              <PivotY>85</PivotY>
+                              <GaugeScales>
+                                <RadialScale Name="RadialScale1">
+                                  <Radius>55</Radius>
+                                  <StartAngle>90</StartAngle>
+                                  <SweepAngle>180</SweepAngle>
+                                  <GaugePointers>
+                                    <RadialPointer Name="RadialPointer1">
+                                      <Type>Bar</Type>
+                                      <PointerCap>
+                                        <Style>
+                                          <BackgroundColor>White</BackgroundColor>
+                                          <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                          <BackgroundGradientEndColor>DimGray</BackgroundGradientEndColor>
+                                          <FontFamily>Arial</FontFamily>
+                                          <BackgroundHatchType>None</BackgroundHatchType>
+                                        </Style>
+                                        <CapImage>
+                                          <OffsetX>0pt</OffsetX>
+                                          <OffsetY>0pt</OffsetY>
+                                          <Source>External</Source>
+                                          <Value />
+                                        </CapImage>
+                                        <OnTop>true</OnTop>
+                                        <CapStyle>RoundedWithWideIndentation</CapStyle>
+                                        <Width>33</Width>
+                                      </PointerCap>
+                                      <NeedleStyle>Tapered</NeedleStyle>
+                                      <Style>
+                                        <Border>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <BackgroundColor>=Switch(Fields!DiskSpacePercentInUse.Value &lt; 70,"Green",
+Fields!DiskSpacePercentInUse.Value &gt; 70 and Fields!DiskSpacePercentInUse.Value &lt; 90,"Gold",
+Fields!DiskSpacePercentInUse.Value &gt; 90,"Maroon")</BackgroundColor>
+                                        <BackgroundGradientType>None</BackgroundGradientType>
+                                        <BackgroundGradientEndColor>Orange</BackgroundGradientEndColor>
+                                        <BackgroundHatchType>None</BackgroundHatchType>
+                                        <ShadowOffset>0pt</ShadowOffset>
+                                      </Style>
+                                      <GaugeInputValue>
+                                        <Value>=Fields!DiskSpacePercentInUse.Value</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </GaugeInputValue>
+                                      <PointerImage>
+                                        <OffsetX>0pt</OffsetX>
+                                        <OffsetY>0pt</OffsetY>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </PointerImage>
+                                      <MarkerLength>25</MarkerLength>
+                                      <MarkerStyle>Wedge</MarkerStyle>
+                                      <Placement>Cross</Placement>
+                                      <Width>18</Width>
+                                    </RadialPointer>
+                                  </GaugePointers>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <BackgroundColor>DimGray</BackgroundColor>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>White</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Interval>50</Interval>
+                                  <IntervalOffset>NaN</IntervalOffset>
+                                  <MaximumValue>
+                                    <Value>100</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <MinimumValue>
+                                    <Value>0</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <GaugeMajorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>14</Length>
+                                    <Width>8</Width>
+                                    <Shape>Trapezoid</Shape>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMajorTickMarks>
+                                  <GaugeMinorTickMarks>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>8</Length>
+                                    <Width>3</Width>
+                                    <Hidden>true</Hidden>
+                                  </GaugeMinorTickMarks>
+                                  <MaximumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MaximumPin>
+                                  <MinimumPin>
+                                    <PinLabel>
+                                      <Style>
+                                        <FontSize>12pt</FontSize>
+                                      </Style>
+                                      <DistanceFromScale>0</DistanceFromScale>
+                                    </PinLabel>
+                                    <Style>
+                                      <Border>
+                                        <Color>DimGray</Color>
+                                        <Style>Solid</Style>
+                                      </Border>
+                                      <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    </Style>
+                                    <Placement>Cross</Placement>
+                                    <TickMarkImage>
+                                      <Source>External</Source>
+                                      <Value />
+                                    </TickMarkImage>
+                                    <Length>6</Length>
+                                    <Width>6</Width>
+                                    <Shape>Circle</Shape>
+                                  </MinimumPin>
+                                  <ScaleLabels>
+                                    <Style>
+                                      <FontSize>14pt</FontSize>
+                                    </Style>
+                                    <Interval>NaN</Interval>
+                                    <IntervalOffset>NaN</IntervalOffset>
+                                    <DistanceFromScale>0</DistanceFromScale>
+                                    <Placement>Outside</Placement>
+                                    <ShowEndLabels>true</ShowEndLabels>
+                                    <UseFontPercent>true</UseFontPercent>
+                                  </ScaleLabels>
+                                  <Width>15</Width>
+                                </RadialScale>
+                              </GaugeScales>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gainsboro</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameShape>CustomSemiCircularN1</FrameShape>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>WhiteSmoke</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <ClipContent>true</ClipContent>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <AspectRatio>1.48</AspectRatio>
+                              <Height>100</Height>
+                              <Width>100</Width>
+                            </RadialGauge>
+                          </RadialGauges>
+                          <GaugeLabels>
+                            <GaugeLabel Name="GaugeLabel1">
+                              <Text>=Fields!DiskSpacePercentInUse.Value</Text>
+                              <TextShadowOffset>0pt</TextShadowOffset>
+                              <UseFontPercent>true</UseFontPercent>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>#00ffffff</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                                <BackgroundGradientEndColor>#00ffffff</BackgroundGradientEndColor>
+                                <FontFamily>Segoe UI Semibold</FontFamily>
+                                <FontSize>14pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <TextAlign>Center</TextAlign>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <Color>=Switch(Fields!DiskSpacePercentInUse.Value &lt; 70,"Green",
+Fields!DiskSpacePercentInUse.Value &gt; 70 and Fields!DiskSpacePercentInUse.Value &lt; 90,"Gold",
+Fields!DiskSpacePercentInUse.Value &gt; 90,"Maroon")</Color>
+                                <ShadowOffset>0pt</ShadowOffset>
+                              </Style>
+                              <Top>50</Top>
+                              <Left>30</Left>
+                              <Height>40</Height>
+                              <Width>40</Width>
+                              <ParentItem>RadialGauges.RadialGauge1</ParentItem>
+                            </GaugeLabel>
+                          </GaugeLabels>
+                          <AutoLayout>true</AutoLayout>
+                          <BackFrame>
+                            <Style>
+                              <Border>
+                                <Style>None</Style>
+                              </Border>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
+                              <BackgroundGradientType>None</BackgroundGradientType>
+                              <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                              <BackgroundHatchType>None</BackgroundHatchType>
+                              <ShadowOffset>0pt</ShadowOffset>
+                            </Style>
+                            <FrameBackground>
+                              <Style>
+                                <BackgroundColor>Silver</BackgroundColor>
+                                <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                <BackgroundHatchType>None</BackgroundHatchType>
+                              </Style>
+                            </FrameBackground>
+                            <FrameImage>
+                              <Source>External</Source>
+                              <Value />
+                            </FrameImage>
+                          </BackFrame>
+                          <TopImage>
+                            <Source>External</Source>
+                            <Value />
+                          </TopImage>
+                          <DataSetName>InstnaceOverview</DataSetName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                          </Style>
+                        </GaugePanel>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DiscWatchList">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DiscWatchList.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                    <FontSize>20pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>Orange</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DiscWatchList</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Black</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>InstnaceOverview</DataSetName>
+            <Top>0.53646in</Top>
+            <Left>0.14062in</Left>
+            <Height>0.92708in</Height>
+            <Width>9.29167in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Black</BackgroundColor>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Tablix>
+          <Subreport Name="SubReportCpu">
+            <ReportName>kpd_cpu_percent</ReportName>
+            <Parameters>
+              <Parameter Name="LocationID">
+                <Value>=Parameters!LocationID.Value</Value>
+              </Parameter>
+              <Parameter Name="ClusterID">
+                <Value>=Parameters!ClusterID.Value</Value>
+              </Parameter>
+              <Parameter Name="DateKey">
+                <Value>=Parameters!DateKey.Value</Value>
+              </Parameter>
+              <Parameter Name="HoursBack">
+                <Value>=Parameters!HoursBack.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>1.655in</Top>
+            <Left>0.24875in</Left>
+            <Height>2in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Subreport Name="SubReportMemory">
+            <ReportName>kpd_memory_usage</ReportName>
+            <Parameters>
+              <Parameter Name="LocationID">
+                <Value>=Parameters!LocationID.Value</Value>
+              </Parameter>
+              <Parameter Name="ClusterID">
+                <Value>=Parameters!ClusterID.Value</Value>
+              </Parameter>
+              <Parameter Name="DateKey">
+                <Value>=Parameters!DateKey.Value</Value>
+              </Parameter>
+              <Parameter Name="HoursBack">
+                <Value>=Parameters!HoursBack.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>1.655in</Top>
+            <Left>3.46007in</Left>
+            <Height>2in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Subreport Name="SubReportSignalWaits">
+            <ReportName>kpd_signal_waits</ReportName>
+            <Parameters>
+              <Parameter Name="LocationID">
+                <Value>=Parameters!LocationID.Value</Value>
+              </Parameter>
+              <Parameter Name="ClusterID">
+                <Value>=Parameters!ClusterID.Value</Value>
+              </Parameter>
+              <Parameter Name="DateKey">
+                <Value>=Parameters!DateKey.Value</Value>
+              </Parameter>
+              <Parameter Name="HoursBack">
+                <Value>=Parameters!HoursBack.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>3.68278in</Top>
+            <Left>0.24875in</Left>
+            <Height>2in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Subreport Name="SubReportLatency">
+            <ReportName>kpd_latency</ReportName>
+            <Parameters>
+              <Parameter Name="LocationID">
+                <Value>=Parameters!LocationID.Value</Value>
+              </Parameter>
+              <Parameter Name="ClusterID">
+                <Value>=Parameters!ClusterID.Value</Value>
+              </Parameter>
+              <Parameter Name="DateKey">
+                <Value>=Parameters!DateKey.Value</Value>
+              </Parameter>
+              <Parameter Name="HoursBack">
+                <Value>=Parameters!HoursBack.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>5.71056in</Top>
+            <Left>0.24875in</Left>
+            <Height>2in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Subreport Name="SubReportDiskSpace">
+            <ReportName>kpd_disk_space</ReportName>
+            <Parameters>
+              <Parameter Name="LocationID">
+                <Value>=Parameters!LocationID.Value</Value>
+              </Parameter>
+              <Parameter Name="ClusterID">
+                <Value>=Parameters!ClusterID.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>3.71056in</Top>
+            <Left>3.47396in</Left>
+            <Height>2in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Subreport Name="SubReportDiskDriveUsed">
+            <ReportName>kpd_diskdrive_space</ReportName>
+            <Parameters>
+              <Parameter Name="LocationID">
+                <Value>=Parameters!LocationID.Value</Value>
+              </Parameter>
+              <Parameter Name="ClusterID">
+                <Value>=Parameters!ClusterID.Value</Value>
+              </Parameter>
+            </Parameters>
+            <Top>1.655in</Top>
+            <Left>6.67139in</Left>
+            <Height>3.0382in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Subreport>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>LIST OF DATABASE SPECS TO GO HERE:  (In Progress)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DB Name    | MB  | I/O % | MODE | STATE | Health | RecMode | CompatLevel | Growth Chart</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>LOCKS WAITS TABLE</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>12.50222in</Top>
+            <Left>0.24875in</Left>
+            <Height>3.95698in</Height>
+            <Width>9.53674in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SERVER PROPERTIES GO HERE: (In Prgress)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ServerName</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MachineName</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>InstnaceName</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SQL Edition + Version + UpdateLevel</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>WINDOWS Version</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Collation</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DefaultPath</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DefaultLogPath</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Build CLR Version</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SQL Server Memory Usage:  MB  | %</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Physical CPU</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Logical CPU</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Physical Memory</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Committed Memory</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Committed Target</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Max Worker COunt</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Affinity Type</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Virtual Type</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Soft NUMA Config</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsClustered</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsFullText</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsIntegratedSecurityOnly</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>FilestreamLevel</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsHadrEnabled</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsHadrManagerStatus</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsXTPSupported</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsPolybaseInstalled</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IsRServicveInstalled</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SERVICES RUNNING (TABLE)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DRIVE LATENCY TABLE</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>4.73487in</Top>
+            <Left>6.6575in</Left>
+            <Height>7.05902in</Height>
+            <Width>3.18354in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>kdp_full_scans_sec</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>5.73834in</Top>
+            <Left>3.50173in</Left>
+            <Height>1.97222in</Height>
+            <Width>3.12799in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Silver</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>kdp_page_splits_sec</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>7.78in</Top>
+            <Left>0.3043in</Left>
+            <Height>1.97222in</Height>
+            <Width>3.12799in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Silver</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>kdp_batch_requests_sec</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>7.78in</Top>
+            <Left>3.48785in</Left>
+            <Height>1.97222in</Height>
+            <Width>3.12799in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Silver</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>kdp_compilations_sec</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>9.82167in</Top>
+            <Left>0.3043in</Left>
+            <Height>1.97222in</Height>
+            <Width>3.12799in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Silver</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>kdp_re-compilations_sec</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>9.82167in</Top>
+            <Left>3.51562in</Left>
+            <Height>1.97222in</Height>
+            <Width>3.12799in</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>Silver</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Database Specific Stats</Value>
+                    <Style>
+                      <FontFamily>MS Reference Sans Serif</FontFamily>
+                      <FontSize>20pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>Orange</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox16</rd:DefaultName>
+            <Top>12.01958in</Top>
+            <Left>0.24875in</Left>
+            <Height>0.42708in</Height>
+            <Width>9.53674in</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>16.47309in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>Black</BackgroundColor>
+        </Style>
+      </Body>
+      <Width>9.85493in</Width>
+      <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="LocationID">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>101874</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Location ID</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ClusterID">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>701</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Cluster ID</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateKey">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Cint(Format(today, "yyyyMMdd"))</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date Key</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="HoursBack">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>6</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Hours Back</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>LocationID</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>ClusterID</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateKey</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>HoursBack</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>19245860-dd02-4902-a95e-a1e3718a1ffd</rd:ReportID>
+</Report>
