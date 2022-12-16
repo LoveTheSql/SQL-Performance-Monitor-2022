@@ -738,7 +738,149 @@ GO
 
 
 
+USE [ServerAnalysisDW]
+GO
+/****** Object:  View [Analysis].[pcv_SignalWaits_ByIntraval_10]  Script Date: 12/15/2022 1:22:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		David Speight
+-- Create date: 20221215
+-- =============================================
+CREATE OR ALTER VIEW [Analysis].[pcv_SignalWaits_ByIntraval_10]
+AS
+
+	-- Get SignalWait Use by 10  minute interval, evaluating only that period.
+	-- MetricID 448 and 440 
+
+	 SELECT	q.LocationID, q.ClusterID, q.DateKey, CONCAT(LEFT(q.TimeKey,3),'000') AS TimeKey, 
+			CAST(100.0 * ( SUM(q.SignalMs) / COUNT(q.SignalMs)) / ( SUM(q.WaitMs) / COUNT(q.WaitMs)) AS NUMERIC(20,2)) AS WaitSignal
+	 FROM	(
+			SELECT	w.LocationID, w.ClusterID, w.DateKey, w.TimeKey, w.iVal
+					, (w.iVal) - (LAG(w.iVal,1) OVER ( ORDER BY w.LocationID, w.ClusterID, w.DateKey, w.TimeKey)) As WaitMs
+					, (s.iVal) - ( LAG(s.iVal,1) OVER ( ORDER BY w.LocationID, w.ClusterID, w.DateKey, w.TimeKey)) As SignalMs
+			FROM	ServerAnalysisDW.Analysis.PerfCounterStats as w with(nolock)
+			INNER JOIN ServerAnalysisDW.Analysis.PerfCounterStats as s with(nolock) on w.LocationID = s.LocationID 
+																					and w.ClusterID = s.ClusterID
+																					and w.DateKey = s.DateKey
+																					and w.TimeKey = s.TimeKey
+																					and w.MetricID = 448
+																					and s. MetricID = 449
+		WHERE	w.UtcDate > CONVERT(VARCHAR(10), GETUTCDATE(),112) -- Look at only todays data
+		) q
+	WHERE (q.iVal is not null)  and (q.SignalMs is not null)
+	GROUP BY q.LocationID, q.ClusterID, q.DateKey, CONCAT(LEFT(q.TimeKey,3),'000');
+	
+GO
+
+
+USE [ServerAnalysisDW]
+GO
+/****** Object:  View [Analysis].[pcv_IoDiskLatency_Intraval_10] Script Date: 12/15/2022 1:22:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		David Speight
+-- Create date: 20221215
+-- =============================================
+CREATE OR ALTER VIEW [Analysis].[pcv_IoDiskLatency_Intraval_10]
+AS
+
+	-- Get Disk Latency Intraval by row 10 minute intraval
+	-- MetricID 351=reads  356=writes  371=stall
+	SELECT iq.LocationID, iq.ClusterID, iq.DateKey, CONCAT(LEFT(iq.TimeKey,3),'000') AS TimeKey, 
+	CONVERT(INT,((CAST(  (SUM(iq.IntravalStall) / COUNT(iq.IntravalStall))    AS FLOAT) / ((SUM(iq.IntravalReads) / COUNT(iq.IntravalReads)) + ( SUM(iq.IntravalWrites) / COUNT(iq.IntravalWrites))  )   ))) AS LatencyMs
+	FROM
+			( -- Inner query to find difference between this row and previous row
+			SELECT sq.LocationID, sq.ClusterID, sq.DateKey, sq.TimeKey 
+			, (sq.Reads) - (LAG(sq.Reads,1) OVER ( ORDER BY LocationID, ClusterID, DateKey, TimeKey)) As IntravalReads
+			, (sq.Writes) - (LAG(sq.Writes,1) OVER ( ORDER BY LocationID, ClusterID, DateKey, TimeKey)) As IntravalWrites
+			, (sq.Stall) - (LAG(sq.Stall,1) OVER ( ORDER BY LocationID, ClusterID, DateKey, TimeKey)) As IntravalStall
+			FROM 
+						( -- Subquery to get totals for read,write,stall
+						SELECT	r.LocationID, r.ClusterID, r.DateKey, r.TimeKey, SUM(r.iVal) AS Reads, SUM(w.iVal) AS Writes, SUM(s.iVal) AS Stall
+						FROM	Analysis.PerfCounterStats as r with(nolock)
+						INNER JOIN .Analysis.PerfCounterStats as w with(nolock) on  r.LocationID = w.LocationID 
+																				and r.ClusterID = w.ClusterID
+																				and r.DateKey = w.DateKey
+																				and r.TimeKey = w.TimeKey
+																				and r.MetricID = 351
+																				and w. MetricID = 356
+						INNER JOIN .Analysis.PerfCounterStats as s with(nolock) on  r.LocationID = s.LocationID 
+																				and r.ClusterID = s.ClusterID
+																				and r.DateKey = s.DateKey
+																				and r.TimeKey = s.TimeKey
+																				and r.MetricID = 351
+																				and s. MetricID = 371
+						where r.DateKey =  CONVERT(VARCHAR(10), GETDATE(),112) -- Limit to today's data only.
+			
+						group by r.LocationID, r.ClusterID, r.DateKey, r.TimeKey			
+						) sq
+			) iq	
+	GROUP BY iq.LocationID, iq.ClusterID, iq.DateKey, CONCAT(LEFT(iq.TimeKey,3),'000');
+	
+	 
+GO
 
 
 
+/****** Object:  View [Analysis].[pcv_IoDiskLatency_Intraval_10] Script Date: 12/15/2022 1:22:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		David Speight
+-- Create date: 20221026
+-- Revision on: 20221215 - Bug fix where Datekey was hard coded. New Signal Wait and new Latency views updated.
+-- =============================================
+
+CREATE   OR ALTER    VIEW [Analysis].[pcv_bi_overview_today]
+AS
+
+	SELECT L.LocationID, L.ClusterID, L.ClusterName, 
+			CONCAT(ClusterName,' (',
+						(CASE L.LocationID	WHEN 101874 THEN 'CBG-US'
+											WHEN 211098 THEN 'CBG-EU'
+											WHEN 211874 THEN 'CBG-EU'
+											WHEN 301035 THEN 'UPIC IMPL'
+											WHEN 301166 THEN 'UPIC DEV'
+											WHEN 301463 THEN 'UPIC PROD'
+											ELSE 'Undefined' END)    ,')') AS ClusterFullName,
+	
+			t.Time4s, 
+			MAX(cpu.iValResult) AS CpuPercent, 
+			MAX(sig.WaitSignal) AS SignalWaits, 
+			MAX(lat.LatencyMs) AS DiscLatencyMs, 
+			MAX(mem.MemoryInstPercentInUse) AS MemoryInstPercentInUse,
+			MAX(du.DiskSpacePercentInUse) AS DiskSpacePercentInUse, 
+			MAX(bat.BatchRequestsSec) as BatchRequestsSec, 
+			MAX(ps.PageSplitSec) AS PageSplitSec, 
+			MAX(fs.FullScansSec) AS FullScansSec, 
+			MAX(comp.SqlCompilationsSec) AS SqlCompilationsSec, 
+			MAX(rcomp.SqlReCompilationsSec) AS SqlReCompilationsSec
+	FROM Analysis.PerfLocation L WITH(NOLOCK) CROSS JOIN  dbo.TimeTens t WITH(NOLOCK)
+	LEFT JOIN [Analysis].[pcv_CpuUsagePercent_10] cpu ON L.LocationID = cpu.LocationID and L.ClusterID = cpu.ClusterID and cpu.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = cpu.Timekey
+	--LEFT JOIN [Analysis].[pcv_SignalWaits_10] sig ON L.LocationID = sig.LocationID and L.ClusterID = sig.ClusterID and sig.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = sig.Timekey
+	LEFT JOIN [Analysis].[pcv_SignalWaits_ByIntraval_10] sig ON L.LocationID = sig.LocationID and L.ClusterID = sig.ClusterID and sig.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = sig.Timekey
+	--LEFT JOIN  [Analysis].[pcv_IoDiskLatencyTotal_10] lat ON L.LocationID = lat.LocationID and L.ClusterID = lat.ClusterID and lat.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = lat.Timekey
+	LEFT JOIN  [Analysis].[pcv_IoDiskLatency_Intraval_10] lat ON L.LocationID = lat.LocationID and L.ClusterID = lat.ClusterID and lat.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = lat.Timekey
+	LEFT JOIN  [Analysis].[pcv_MemoryInstUsage_10] mem  ON L.LocationID = mem.LocationID and L.ClusterID = mem.ClusterID and mem.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = mem.Timekey
+	LEFT JOIN [Analysis].[pcv_DiskUsage_10] du ON L.LocationID = du.LocationID and L.ClusterID = du.ClusterID and du.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = du.Timekey -- Only for overview chart uses 60 days
+	LEFT JOIN  [Analysis].[pcv_BatchRequestsSec_10] bat ON L.LocationID = bat.LocationID and L.ClusterID = bat.ClusterID and bat.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = bat.Timekey
+	LEFT JOIN [Analysis].[pcv_PageSpiltsSec_10] ps ON L.LocationID = ps.LocationID and L.ClusterID = ps.ClusterID and ps.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = ps.Timekey
+	LEFT JOIN  [Analysis].[pcv_FullScansSec_10] fs ON L.LocationID = fs.LocationID and L.ClusterID = fs.ClusterID and fs.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = fs.Timekey
+	LEFT JOIN [Analysis].[pcv_SqlCompilationsSec_10] comp  ON L.LocationID = comp.LocationID and L.ClusterID = comp.ClusterID and comp.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = comp.Timekey
+	LEFT JOIN [Analysis].[pcv_SqlReCompilationsSec_10] rcomp  ON L.LocationID = rcomp.LocationID and L.ClusterID = rcomp.ClusterID and rcomp.DateKey = CONVERT(VARCHAR(10), GETUTCDATE(),112) and t.Time6 = rcomp.Timekey
+	WHERE L.IsActive = 1 and L.ServerID = 1
+	and  CONVERT(TIME, t.dtTime) <  CONVERT(TIME, getutcdate())
+	GROUP BY L.LocationID, L.ClusterID,  L.ClusterName, t.Time4s;
+GO
 
