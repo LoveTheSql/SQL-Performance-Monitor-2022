@@ -27,8 +27,8 @@
             <Value>=Parameters!ClusterID.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT TOP(@HoursBack*6) CONCAT(left(TimeKey,2),':',SUBSTRING(TimeKey,3,2)) AS TimeKey, DiscLatencyMs
-FROM [Analysis].[pcv_IoDiskLatencyTotal_10]
+        <CommandText>SELECT TOP(@HoursBack*6) CONCAT(left(TimeKey,2),':',SUBSTRING(TimeKey,3,2)) AS TimeKey, LatencyMs AS DiscLatencyMs
+FROM [Analysis].[pcv_IoDiskLatency_Intraval_10]
 WHERE DateKey = @DateKey And LocationID = @LocationID and ClusterID = @ClusterID
 ORDER BY TimeKey DESC;</CommandText>
       </Query>

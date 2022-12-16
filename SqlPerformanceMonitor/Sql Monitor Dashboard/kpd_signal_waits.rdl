@@ -27,8 +27,8 @@
             <Value>=Parameters!ClusterID.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>SELECT TOP(@HoursBack*6) CONCAT(left(TimeKey,2),':',SUBSTRING(TimeKey,3,2)) AS TimeKey, SignalWaits
-FROM [Analysis].[pcv_SignalWaits_10]
+        <CommandText>SELECT TOP(@HoursBack*6) CONCAT(left(TimeKey,2),':',SUBSTRING(TimeKey,3,2)) AS TimeKey, WaitSignal AS SignalWaits
+FROM [Analysis].[pcv_SignalWaits_ByIntraval_10]
 WHERE DateKey = @DateKey And LocationID = @LocationID and ClusterID = @ClusterID
 ORDER BY TimeKey DESC;</CommandText>
       </Query>
@@ -39,7 +39,7 @@ ORDER BY TimeKey DESC;</CommandText>
         </Field>
         <Field Name="SignalWaits">
           <DataField>SignalWaits</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
