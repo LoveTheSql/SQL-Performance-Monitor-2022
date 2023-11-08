@@ -29,8 +29,8 @@
         </QueryParameters>
         <CommandText>SELECT TOP(@HoursBack*6)  
 CONCAT(left(TimeKey,2),':',SUBSTRING(TimeKey,3,2)) AS TimeKey, 
-iValResult AS CpuPercent
-FROM [Analysis].[pcv_CpuUsagePercent_10]
+iVal AS CpuPercent
+FROM [Analysis].[pcv_SysCpuUsagePercent_10]
 WHERE DateKey = @DateKey And LocationID = @LocationID and ClusterID = @ClusterID
 ORDER BY TimeKey DESC;</CommandText>
       </Query>
@@ -41,7 +41,7 @@ ORDER BY TimeKey DESC;</CommandText>
         </Field>
         <Field Name="CpuPercent">
           <DataField>CpuPercent</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
